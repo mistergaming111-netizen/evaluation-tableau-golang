@@ -20,7 +20,24 @@ func main() {
 	}
 	afficherEquipe(equipe)
 	fmt.Println("=== ANALYSE ===")
-	fmt.Println("Votre soldat avec le plus de vie :")
+	fmt.Println()
+
+	soldatVie := trouverPlusDeVie(equipe)
+	fmt.Println("Soldat avec le plus de vie :", soldatVie.nom)
+	fmt.Println("Vie :", soldatVie.vie)
+	fmt.Println()
+
+	soldatAttaque := trouverPlusDAttaque(equipe)
+	fmt.Println("Soldat avec la plus grande attaque :", soldatAttaque.nom)
+	fmt.Println("Attaque :", soldatAttaque.attaque)
+	fmt.Println()
+
+	moyenne := calculerVieMoyenne(equipe)
+	fmt.Printf("Vie moyenne : %.2f\n", moyenne)
+	fmt.Println()
+
+	faibles := compterFaibles(equipe)
+	fmt.Println("Soldats avec moins de 800 PV :", faibles)
 }
 
 
@@ -63,4 +80,14 @@ func calculerVieMoyenne(equipe [6]Soldat) float64 {
 }
 moyenne := float64(somme) / float64(len(equipe))
 return moyenne
+}
+
+func compterFaibles(equipe [6]Soldat) int {
+	compteur := 0
+	for i := 0; i < len(equipe); i++ {
+		if equipe[i].vie < 800 {
+			compteur++
+		}
+	}
+	return compteur
 }
