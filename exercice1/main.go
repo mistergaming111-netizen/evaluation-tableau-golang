@@ -8,16 +8,6 @@ type Soldat struct {
 	attaque int
 }
 
-func afficherEquipe(equipe [6]Soldat) {
-	fmt.Println("=== ÉQUIPE ===")
-	fmt.Println()
-	for i := 0; i < len(equipe); i++ {
-		fmt.Println(equipe[i].nom)
-		fmt.Println("Vie :", equipe[i].vie)
-		fmt.Println("Attaque :", equipe[i].attaque)
-		fmt.Println()
-	}
-}
 
 func main() {
 	equipe := [6]Soldat{
@@ -29,4 +19,27 @@ func main() {
 		{"Jaina", 500, 450},
 	}
 	afficherEquipe(equipe)
+}
+
+
+func afficherEquipe(equipe [6]Soldat) {
+	fmt.Println("=== ÉQUIPE ===")
+	fmt.Println()
+	for i := 0; i < len(equipe); i++ {
+		fmt.Println(equipe[i].nom)
+		fmt.Println("Vie :", equipe[i].vie)
+		fmt.Println("Attaque :", equipe[i].attaque)
+		fmt.Println()
+	}
+}
+
+
+func trouverPlusDeVie(equipe [6]Soldat) Soldat {
+	meilleur := equipe[0]
+	for i := 0; i < len(equipe); i++ {
+		if equipe[i].vie > meilleur.vie {
+			meilleur = equipe[i]
+		}
+	}
+	return meilleur
 }
