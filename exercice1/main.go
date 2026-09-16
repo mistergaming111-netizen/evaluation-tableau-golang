@@ -43,3 +43,13 @@ func trouverPlusDeVie(equipe [6]Soldat) Soldat {
 	}
 	return meilleur
 }
+
+func trouverPlusDAttaque(equipe [6]Soldat) Soldat {
+	meilleur := equipe[0]
+	for i := 0; i< len(equipe); i++ {
+		if equipe[i].attaque > meilleur.attaque {
+			meilleur = equipe[i]
+		}
+	}
+	return meilleur
+}
