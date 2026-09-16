@@ -19,6 +19,8 @@ func main() {
 		{"Jaina", 500, 450},
 	}
 	afficherEquipe(equipe)
+	fmt.Println("=== ANALYSE ===")
+	fmt.Println("Votre soldat avec le plus de vie :")
 }
 
 
@@ -52,4 +54,13 @@ func trouverPlusDAttaque(equipe [6]Soldat) Soldat {
 		}
 	}
 	return meilleur
+}
+
+func calculerVieMoyenne(equipe [6]Soldat) float64 {
+	somme := 0
+	for i := 0; i < len(equipe); i++ {
+		somme += equipe[i].vie
+}
+moyenne := float64(somme) / float64(len(equipe))
+return moyenne
 }
