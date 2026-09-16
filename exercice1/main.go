@@ -9,11 +9,14 @@ type Soldat struct {
 }
 
 func afficherEquipe(equipe [6]Soldat) {
+	fmt.Println("=== ÉQUIPE ===")
+	fmt.Println()
 	for i := 0; i < len(equipe); i++ {
-		
-
-}
-
+		fmt.Println(equipe[i].nom)
+		fmt.Println("Vie :", equipe[i].vie)
+		fmt.Println("Attaque :", equipe[i].attaque)
+		fmt.Println()
+	}
 }
 
 func main() {
@@ -25,7 +28,5 @@ func main() {
 		{"Garrosh", 1000, 280},
 		{"Jaina", 500, 450},
 	}
+	afficherEquipe(equipe)
 }
-
-
-
