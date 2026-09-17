@@ -8,7 +8,6 @@ type Soldat struct {
 	attaque int
 }
 
-
 func main() {
 	equipe := [6]Soldat{
 		{"Arthas", 1200, 250},
@@ -18,7 +17,11 @@ func main() {
 		{"Garrosh", 1000, 280},
 		{"Jaina", 500, 450},
 	}
+
+	
 	afficherEquipe(equipe)
+
+	
 	fmt.Println("=== ANALYSE ===")
 	fmt.Println()
 
@@ -38,6 +41,31 @@ func main() {
 
 	faibles := compterFaibles(equipe)
 	fmt.Println("Soldats avec moins de 800 PV :", faibles)
+	fmt.Println()
+
+	
+	fmt.Println("=== BATAILLE ===")
+	fmt.Println()
+
+	var nbAttaques int
+	fmt.Print("Nombre d'attaques ennemies : ")
+	fmt.Scan(&nbAttaques)
+	fmt.Println()
+
+	for i := 1; i <= nbAttaques; i++ {
+		var degats int
+		fmt.Printf("Attaque %d : ", i)
+		fmt.Scan(&degats)
+		fmt.Println()
+
+		
+		attaquerEquipe(&equipe, degats)
+
+		
+		fmt.Printf("=== APRÈS L'ATTAQUE %d ===\n\n", i)
+		afficherEtat(equipe)
+		fmt.Println()
+	}
 }
 
 
@@ -65,7 +93,7 @@ func trouverPlusDeVie(equipe [6]Soldat) Soldat {
 
 func trouverPlusDAttaque(equipe [6]Soldat) Soldat {
 	meilleur := equipe[0]
-	for i := 0; i< len(equipe); i++ {
+	for i := 0; i < len(equipe); i++ {
 		if equipe[i].attaque > meilleur.attaque {
 			meilleur = equipe[i]
 		}
@@ -77,9 +105,8 @@ func calculerVieMoyenne(equipe [6]Soldat) float64 {
 	somme := 0
 	for i := 0; i < len(equipe); i++ {
 		somme += equipe[i].vie
-}
-moyenne := float64(somme) / float64(len(equipe))
-return moyenne
+	}
+	return float64(somme) / float64(len(equipe))
 }
 
 func compterFaibles(equipe [6]Soldat) int {
@@ -90,4 +117,29 @@ func compterFaibles(equipe [6]Soldat) int {
 		}
 	}
 	return compteur
+}
+
+
+func attaquerEquipe(equipe *[6]Soldat, degats int) {
+	for i := 0; i < len(equipe); i++ {
+		
+		if equipe[i].vie > 0 {
+			equipe[i].vie -= degats
+			
+			if equipe[i].vie < 0 {
+				equipe[i].vie = 0
+			}
+		}
+	}
+}
+
+
+func afficherEtat(equipe [6]Soldat) {
+	for i := 0; i < len(equipe); i++ {
+		if equipe[i].vie > 0 {
+			fmt.Printf("%s : %d PV\n", equipe[i].nom, equipe[i].vie)
+		} else {
+			fmt.Printf("%s : KO\n", equipe[i].nom)
+		}
+	}
 }
